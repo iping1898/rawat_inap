@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tampilan sql</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #476b6b 0%, #476b6b 100%);
+            justify-content: center;
+            padding-top: 20px;
+            color: #eaeaea;
+            min-height: 100vh;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        th, td {
+            border: 1px solid #ffffff;
+            padding: 8px;
+            text-align: center;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #3be8ff;
+            text-shadow: 0 2px 12px rgba(0,0,0,0.18);
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .aripin-container {
+            background: rgba(76, 122, 128, 0.95);
+            padding: 20px 32px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 24px rgba(0,0,0,0.28);
+            width: 80%;
+            backdrop-filter: blur(2px);
+            margin: auto;
+        }
+
+        .aripin-btn {
+            display: inline-block;
+            padding: 10px 28px;
+            background: linear-gradient(90deg, #23233a 0%, #3be8ff 100%);
+            color: #fff;
+            border-radius: 6px;
+            font-weight: bold;
+            text-decoration: none;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.13);
+            transition: background 0.22s cubic-bezier(.4,0,.2,1), color 0.18s, transform 0.18s;
+            margin-top: 8px;
+            border: none;
+        }
+        .aripin-btn:hover {
+            background: linear-gradient(90deg, #3be8ff 0%, #23233a 100%);
+            color: #23233a;
+            transform: scale(1.04);
+            box-shadow: 0 4px 20px 0 rgba(0,0,0,0.18);
+        }
+    </style>
+</head>
+<body>
+    <nav style="text-align: center; margin-bottom: 20px;">
+            <a href="/" style="color: #6ea8fe; text-decoration: none; margin: 0 10px;">Transaksi</a> |
+            <a href="/tampil_pasien" style="color: #6ea8fe; text-decoration: none; margin: 0 10px;">Pasien</a>
+        </nav>
+    <div class="aripin-container">
+        <h1>Daftar Transaksi</h1>
+        <table>
+            <center><a href="/tabel" class="aripin-btn">Tambah Data</a></center>
+            <tr>
+                <th>ID Transaksi</th>
+                <th>kelas kamar</th>
+                <th>harga kamar</th>
+                <th>Nama Pasien</th>
+                <th>Tanggal Masuk</th>
+                <th>Tanggal Keluar</th>
+                <th>Total Biaya</th>
+                <th>status pembayaran</th>
+                <th>tanggal transaksi</th>
+                <th>Aksi</th>
+            </tr>
+            {% if transaksi %}
+                {% for t in transaksi %}
+                <tr>
+                    <td>{{ t.id_transaksi_aripin }}</td>
+                    <td>{{ t.kelas_aripin }}</td>
+                    <td>{{ t.harga_aripin }}</td>
+                    <td>{{ t.nama_aripin }}</td>
+                    <td>{{ t.tgl_masuk_aripin }}</td>
+                    <td>{{ t.tgl_keluar_aripin }}</td>
+                    <td>{{ t.total_biaya_aripin }}</td>
+                    <td>{{ t.status_pembayaran_aripin }}</td>
+                    <td>{{ t.tgl_aripin }}</td>
+                    <td>
+                        <a href="{{ url_for('edit', id_transaksi_aripin=t.id_transaksi_aripin) }}" class="aripin-btn">Edit</a>
+                        <a href="{{ url_for('delete', id_transaksi_aripin=t.id_transaksi_aripin) }}" class="aripin-btn">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="10">Data tidak ditemukan.</td>
+                </tr>
+            {% endif %}
+            <div style="text-align:center; margin-bottom: 18px;">
+
+        </div>
+        </table>
+
+    </div>
+</body>
+</html>
