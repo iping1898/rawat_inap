@@ -224,6 +224,62 @@ def cetak_semua_pasien():
     except Exception as e:
         return f"<h1>Gagal Mencetak PDF</h1><p>Error: {e}</p>"
 
+<<<<<<< HEAD
+=======
+@app.route('/cetak_semua_transaksi')
+def cetak_semua_transaksi():
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor(dictionary=True)
+        cursor.execute("SELECT * FROM transaksi_aripin")
+        data_transaksi = cursor.fetchall()
+        cursor.close()
+        conn.close()
+
+        pdf = FPDF()
+        pdf.add_page()
+        pdf.set_font('Helvetica', 'B', 16)
+        pdf.cell(0, 10, 'Laporan Data Transaksi', align='C')
+        pdf.ln(5)
+
+        pdf.set_font('Helvetica', 'B', 10)
+        pdf.set_fill_color(200, 220, 255)
+
+        col_id = 30
+        col_pasien = 30
+        col_total = 40
+        col_status = 50
+        col_tgl = 40
+
+        pdf.cell(col_id, 10, 'ID Transaksi', border=1, align='C', fill=True)
+        pdf.cell(col_pasien, 10, 'ID Pasien', border=1, align='C', fill=True)
+        pdf.cell(col_total, 10, 'Total Biaya', border=1, align='C', fill=True)
+        pdf.cell(col_status, 10, 'Status', border=1, align='C', fill=True)
+        pdf.cell(col_tgl, 10, 'Tanggal', border=1, align='C', fill=True)
+        pdf.ln()
+
+        pdf.set_font('Helvetica', '', 10)
+        for row in data_transaksi:
+            pdf.cell(col_id, 10, str(row.get('id_transaksi_aripin', '')), border=1)
+            pdf.cell(col_pasien, 10, str(row.get('id_pasien_aripin', '')), border=1)
+            pdf.cell(col_total, 10, str(row.get('total_biaya_aripin', '')), border=1)
+            pdf.cell(col_status, 10, str(row.get('status_pembayaran_aripin', '')), border=1)
+            pdf.cell(col_tgl, 10, str(row.get('tgl_aripin', '')), border=1)
+            pdf.ln()
+
+        buf = BytesIO()
+        pdf.output(buf)
+        pdf_bytes = buf.getvalue()
+
+        response = make_response(pdf_bytes)
+        response.headers['Content-Type'] = 'application/pdf'
+        response.headers['Content-Disposition'] = 'inline; filename=laporan_transaksi.pdf'
+        return response
+
+    except Exception as e:
+        return f"<h1>Gagal Mencetak PDF</h1><p>Error: {e}</p>"
+    
+>>>>>>> ac15e68 (First commit)
 @app.route('/delete/<id_transaksi_aripin>')
 def delete(id_transaksi_aripin):
     try:
