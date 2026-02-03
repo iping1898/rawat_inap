@@ -69,12 +69,7 @@
             <a href="/tampil_pasien" style="color: #6ea8fe; text-decoration: none; margin: 0 10px;">Pasien</a>
         </nav>
     <div class="aripin-container">
-<<<<<<< HEAD
         <h1>Daftar Transaksi</h1>
-=======
-        <h1>Daftar Transaksippp</h1>
-        <a href="{{ url_for('cetak_semua_transaksi') }}" target="_blank" class="aripin-btn">Cetak Semua Transaksi</a>
->>>>>>> ac15e68 (First commit)
         <table>
             <center><a href="/tabel" class="aripin-btn">Tambah Data</a></center>
             <tr>
@@ -104,17 +99,14 @@
                     <td>
                         <a href="{{ url_for('edit', id_transaksi_aripin=t.id_transaksi_aripin) }}" class="aripin-btn">Edit</a>
                         <a href="{{ url_for('delete', id_transaksi_aripin=t.id_transaksi_aripin) }}" class="aripin-btn">Delete</a>
+                        <a href="{{ url_for('cetak_transaksi', id_transaksi_aripin=t.id_transaksi_aripin) }}" target="_blank" class="aripin-btn">Cetak</a>
                     </td>
                 </tr>
-<<<<<<< HEAD
-=======
                 <tr>
-
                     <td colspan="10">
-                        <a href="{{ url_for('cetak_semua_pasien') }}" target="_blank" class="aripin-btn">Cetak Halaman</a>
+                        <a href="{{ url_for('cetak_semua_transaksi') }}" target="_blank" class="aripin-btn">Cetak Halaman</a>
                     </td>
                 </tr>
->>>>>>> ac15e68 (First commit)
                 {% endfor %}
             {% else %}
                 <tr>
@@ -125,13 +117,12 @@
 
         </div>
         </table>
-<<<<<<< HEAD
-=======
+
         <div style="text-align:center; margin-bottom:12px;">
             <a href="{{ url_for('cetak_semua_transaksi') }}" target="_blank" class="aripin-btn">Cetak Semua Transaksi</a>
 
         </div>
->>>>>>> ac15e68 (First commit)
+
 
     </div>
 </body>
